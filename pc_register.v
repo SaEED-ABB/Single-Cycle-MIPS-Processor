@@ -6,7 +6,8 @@ module pc_register(clk, rst, pc_in,
 	output reg[31:0] pc_out;
 
     always @(posedge clk) begin
-        pc_out = pc_in;
+        if (rst) pc_out = 32'b0;
+	else pc_out = pc_in;
     end
 
 endmodule // pc_register

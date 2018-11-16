@@ -24,11 +24,11 @@ instructions have the same opcode:
 `define OPCODE_RTYPE    6'b000000
 `define OPCODE_ADDI     6'b001000
 `define OPCODE_ANDI     6'b001100
+`define OPCODE_ORI      6'b001101
+`define OPCODE_XORI		6'b001110
 `define OPCODE_BEQ      6'b000100
 `define OPCODE_BNE      6'b000101
 `define OPCODE_LW       6'b100011
-`define OPCODE_ORI      6'b001101
-`define OPCODE_XORI		6'b001110
 `define OPCODE_SW       6'b101011
 `define OPCODE_JAL      6'b000011
 `define OPCODE_J        6'b000010
@@ -243,7 +243,7 @@ module controller(clk, rst, zero, instOpcode, instFunc,
 				multLoad <= 0;
 			end
 			`OPCODE_ADDI: begin
-				regDst <= 2'b01;
+				regDst <= 2'b00;
 				ALUSrc <= 1;
 				memToReg <= 0;
 				regWrite <= 1;
@@ -258,7 +258,7 @@ module controller(clk, rst, zero, instOpcode, instFunc,
 				multLoad <= 0;
 			end
 			`OPCODE_ANDI: begin
-				regDst <= 2'b01;
+				regDst <= 2'b00;
 				ALUSrc <= 1;
 				memToReg <= 0;
 				regWrite <= 1;
@@ -273,7 +273,7 @@ module controller(clk, rst, zero, instOpcode, instFunc,
 				multLoad <= 0;
 			end
 			`OPCODE_ORI: begin
-				regDst <= 2'b01;
+				regDst <= 2'b00;
 				ALUSrc <= 1;
 				memToReg <= 0;
 				regWrite <= 1;
@@ -288,7 +288,7 @@ module controller(clk, rst, zero, instOpcode, instFunc,
 				multLoad <= 0;
 			end
 			`OPCODE_XORI: begin
-				regDst <= 2'b01;
+				regDst <= 2'b00;
 				ALUSrc <= 1;
 				memToReg <= 0;
 				regWrite <= 1;

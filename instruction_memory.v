@@ -16,7 +16,7 @@ module instruction_memory(clk, rst, address,
 		//addi r3, r0, 0
 		{instructions[11], instructions[10], instructions[9], instructions[8]}  = {6'b001000, 5'd0, 5'd3, 16'd0};
 		//LOOP:	beq r1,r2, END
-		{instructions[15], instructions[14], instructions[13], instructions[12]} = {6'b000100, 5'd1, 5'd2, 16'd5};
+		{instructions[15], instructions[14], instructions[13], instructions[12]} = {6'b000100, 5'd1, 5'd2, 16'd4};
 		//	lw r4, 1000(r2)
 		{instructions[19], instructions[18], instructions[17], instructions[16]} = {6'b100011, 5'd2, 5'd4, 16'd1000};
 		//	add r3, r3, r4
@@ -28,6 +28,11 @@ module instruction_memory(clk, rst, address,
 		//END:	sw r3, 2000(r0)
 		{instructions[35], instructions[34], instructions[33], instructions[32]} = {6'b101011, 5'd0, 5'd3, 16'd2000};
 
+
+
+		//	lw r3, 2000(r0)
+		{instructions[39], instructions[38], instructions[37], instructions[36]} = {6'b100011, 5'd0, 5'd3, 16'd2000};
+		
 	end
 
 /*

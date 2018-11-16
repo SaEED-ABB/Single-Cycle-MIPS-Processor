@@ -1,3 +1,10 @@
+//opcodes
+`define OPCODE_RTYPE    6'b000000
+`define OPCODE_ADDI     6'b001000
+`define OPCODE_ANDI     6'b001100
+`define OPCODE_ORI      6'b001101
+`define OPCODE_XORI		6'b001110
+
 
 // ALU operations
 `define OP_AND 3'b000
@@ -19,15 +26,20 @@
 `define FUNC_MFLO	 6'b010010
 `define FUNC_MFHI	 6'b010000
 
-module alu_control(clk, rst, instFunc, ALUOp, 
+module alu_control(clk, rst, opcode, instFunc, ALUOp, 
 					ALUOperation);
 	input wire clk, rst;
 	input wire[5:0] instFunc;
+	input wire[5:0] opcode;
 	input wire[1:0] ALUOp;
 	output wire[2:0] ALUOperation;
 
 
-	assign ALUOperation = (ALUOp == 2'b00) ? `OP_ADD :  
+	assign ALUOperation = 	(opcode == `OPCODE_ADDI) ? `OP_ADD :
+				(opcode == `OPCODE_ORI) ? `OP_OR :
+				(opcode == `OPCODE_XORI) ? `OP_XOR :
+				(opcode == `OPCODE_ANDI) ? `OP_AND : 
+						((ALUOp == 2'b00) ? `OP_ADD :  
 						(ALUOp[0] == 1'b1) ? `OP_SUB : 
 						(ALUOp[1] == 1'b1) ? (instFunc == `FUNC_ADD ? `OP_ADD :
 											instFunc == `FUNC_SUB ? `OP_SUB :
@@ -35,6 +47,6 @@ module alu_control(clk, rst, instFunc, ALUOp,
 											instFunc == `FUNC_OR ? `OP_OR :
 											instFunc == `FUNC_SLT ? `OP_SLT :
 											3'bxxx) :
-						3'bxxx;
+						3'bxxx);
 
 endmodule // alu_control
