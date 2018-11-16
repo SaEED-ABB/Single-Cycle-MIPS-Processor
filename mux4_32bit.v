@@ -5,6 +5,6 @@ module mux4_32bit(sel, a0, a1, a2, a3,
 	input wire[31:0] a0, a1, a2, a3;
 	output wire[31:0] which_a;
 
+	assign which_a = (sel == 2'b00) ? a0 : ((sel == 2'b01) ? a1 : ((sel == 2'b10) ? a2 : a3));
 
-
-endmodule // mux2_32bit
+endmodule // mux4_32bit
