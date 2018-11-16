@@ -1,4 +1,24 @@
 
+// ALU operations
+`define OP_AND 3'b000
+`define OP_OR  3'b001
+`define OP_XOR 3'b011  // by convention
+`define OP_ADD 3'b010
+`define OP_SUB 3'b110
+`define OP_SLT 3'b111
+
+// Functions
+`define FUNC_ADD     6'b100000
+`define FUNC_AND     6'b100100
+`define FUNC_JR      6'b001000
+`define FUNC_OR      6'b100101
+`define FUNC_XOR	 6'b100110
+`define FUNC_SLT     6'b101010
+`define FUNC_SUB     6'b100010
+`define FUNC_MULT	 6'b011000
+`define FUNC_MFLO	 6'b010010
+`define FUNC_MFHI	 6'b010000
+
 module alu_control(clk, rst, instFunc, ALUOp, 
 					ALUOperation);
 	input wire clk, rst;
@@ -7,13 +27,13 @@ module alu_control(clk, rst, instFunc, ALUOp,
 	output wire[2:0] ALUOperation;
 
 
-	assign ALUOperation = (ALUOp == 2'b00) ? 3'b010 :  // add
-						(ALUOp[0] == 1'b1) ? 3'b110 :  // sub
-						(ALUOp[1] == 1'b1) ? (instFunc[3:0] == 4'b0000 ? 3'b010 :  // add
-											instFunc[3:0] == 4'b0010 ? 3'b110 :  // sub
-											instFunc[3:0] == 4'b0100 ? 3'b000 :  // and
-											instFunc[3:0] == 4'b0101 ? 3'b001 :  // or
-											instFunc[3:0] == 4'b1010 ? 3'b111 :  // slt
+	assign ALUOperation = (ALUOp == 2'b00) ? `OP_ADD :  
+						(ALUOp[0] == 1'b1) ? `OP_SUB : 
+						(ALUOp[1] == 1'b1) ? (instFunc == `FUNC_ADD ? `OP_ADD :
+											instFunc == `FUNC_SUB ? `OP_SUB :
+											instFunc == `FUNC_AND ? `OP_AND :
+											instFunc == `FUNC_OR ? `OP_OR :
+											instFunc == `FUNC_SLT ? `OP_SLT :
 											3'bxxx) :
 						3'bxxx;
 

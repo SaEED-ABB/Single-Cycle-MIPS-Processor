@@ -1,13 +1,24 @@
 
-// `ifndef _const_h
-// `define _const_h
+/*
+instructions have the same opcode:
+		- add, sub, and, or, xor, slt, mult, mflo, mfhi, jr
 
-// ALU operations
-`define OP_AND 3'b000
-`define OP_OR  3'b001
-`define OP_ADD 3'b010
-`define OP_SUB 3'b110
-`define OP_SLT 3'b111
+		- addi
+		- andi
+		- ori
+		- xor i
+
+		- lw 
+		- sw
+
+		- lui
+
+		- j
+		- jal
+		- beq
+		- bne
+*/	
+
 
 // Opcodes
 `define OPCODE_RTYPE    6'b000000
@@ -17,6 +28,7 @@
 `define OPCODE_BNE      6'b000101
 `define OPCODE_LW       6'b100011
 `define OPCODE_ORI      6'b001101
+`define OPCODE_XORI		6'b001110
 `define OPCODE_SW       6'b101011
 `define OPCODE_JAL      6'b000011
 `define OPCODE_J        6'b000010
@@ -27,6 +39,7 @@
 `define FUNC_AND     6'b100100
 `define FUNC_JR      6'b001000
 `define FUNC_OR      6'b100101
+`define FUNC_XOR	 6'b100110
 `define FUNC_SLT     6'b101010
 `define FUNC_SUB     6'b100010
 `define FUNC_MULT	 6'b011000
@@ -59,7 +72,6 @@ module controller(clk, rst, zero, instOpcode, instFunc,
 				link <= 0;
 				bne <= 0;
 				multLoad <= 0;
-
 
 				case (instFunc)
 					`FUNC_JR: begin
@@ -230,9 +242,66 @@ module controller(clk, rst, zero, instOpcode, instFunc,
 				bne <= 0;
 				multLoad <= 0;
 			end
-			
+			`OPCODE_ADDI: begin
+				regDst <= 2'b01;
+				ALUSrc <= 1;
+				memToReg <= 0;
+				regWrite <= 1;
+				memRead <= 0;
+				memWrite <= 0;
+				branch <= 0;
+				ALUOp <= 2'b10;
+				jump <= 2'b00;
+				regWriteDataSrc <= 2'b00;
+				link <= 0;
+				bne <= 0;
+				multLoad <= 0;
+			end
+			`OPCODE_ANDI: begin
+				regDst <= 2'b01;
+				ALUSrc <= 1;
+				memToReg <= 0;
+				regWrite <= 1;
+				memRead <= 0;
+				memWrite <= 0;
+				branch <= 0;
+				ALUOp <= 2'b10;
+				jump <= 2'b00;
+				regWriteDataSrc <= 2'b00;
+				link <= 0;
+				bne <= 0;
+				multLoad <= 0;
+			end
+			`OPCODE_ORI: begin
+				regDst <= 2'b01;
+				ALUSrc <= 1;
+				memToReg <= 0;
+				regWrite <= 1;
+				memRead <= 0;
+				memWrite <= 0;
+				branch <= 0;
+				ALUOp <= 2'b10;
+				jump <= 2'b00;
+				regWriteDataSrc <= 2'b00;
+				link <= 0;
+				bne <= 0;
+				multLoad <= 0;
+			end
+			`OPCODE_XORI: begin
+				regDst <= 2'b01;
+				ALUSrc <= 1;
+				memToReg <= 0;
+				regWrite <= 1;
+				memRead <= 0;
+				memWrite <= 0;
+				branch <= 0;
+				ALUOp <= 2'b10;
+				jump <= 2'b00;
+				regWriteDataSrc <= 2'b00;
+				link <= 0;
+				bne <= 0;
+				multLoad <= 0;
+			end		
 		endcase
-
 	end
-
 endmodule // controller
