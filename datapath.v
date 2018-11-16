@@ -68,4 +68,7 @@ module datapath(clk, rst, regDst, branch, bne, memRead, memWrite, memToReg, ALUS
 	mux4_32bit PCP4JUMP_J_READ1(.sel(jump), .a0(pc_plus_4_or_jump), .a1(final_j_addr), .a2(read_data1), .which_a(pc_in));
 
 	mux2_32bit READDATA2_ADDR(.sel(ALUSrc), .a0(read_data2), .a1(sign_extended_beq_addr), .which_a(alu_in2));
+
+	adder PC_4_ADDER(.a(pc_out), .b(32'd4), .a_plus_b(pc_plus_4));
+
 endmodule // datapath
