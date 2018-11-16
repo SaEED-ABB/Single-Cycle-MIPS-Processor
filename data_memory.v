@@ -21,6 +21,17 @@ module data_memory(clk, rst, memRead, memWrite, address, writeData,
 		{memory[1035], memory[1034], memory[1033], memory[1032]} = 32'd10;
 		{memory[1039], memory[1038], memory[1037], memory[1036]} = 32'd10;
 
+		{memory[1043], memory[1042], memory[1041], memory[1040]} = 32'd10;
+		{memory[1047], memory[1046], memory[1045], memory[1044]} = 32'd10;
+		{memory[1051], memory[1050], memory[1049], memory[1048]} = 32'd10;
+		{memory[1055], memory[1054], memory[1053], memory[1052]} = 32'd15;
+		{memory[1059], memory[1058], memory[1057], memory[1056]} = 32'd10;
+		{memory[1063], memory[1062], memory[1061], memory[1060]} = 32'd10;
+		{memory[1067], memory[1066], memory[1065], memory[1064]} = 32'd10;
+		{memory[1071], memory[1070], memory[1069], memory[1068]} = 32'd10;
+		{memory[1075], memory[1074], memory[1073], memory[1072]} = 32'd10;
+		{memory[1079], memory[1078], memory[1077], memory[1076]} = 32'd10;
+
 	end
 
 

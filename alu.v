@@ -18,9 +18,9 @@ module alu(ALUOperation, a, b,
 						(ALUOperation == `OP_AND) ? a & b :
 						(ALUOperation == `OP_OR) ? a | b :
 						(ALUOperation == `OP_XOR) ? a ^ b :
-						(ALUOperation == `OP_SLT) ? a - b :
+						(ALUOperation == `OP_SLT) ? ((a < b) ? 32'b1 : 32'b0) :
 						32'bx;
 
-	assign zero = (ALUOperation == `OP_SUB && ALUResult == 32'b0) ? 1'b1 : 1'b0;
+	assign zero = (ALUResult == 32'b0) ? 1'b1 : 1'b0;
 	
 endmodule // alu
